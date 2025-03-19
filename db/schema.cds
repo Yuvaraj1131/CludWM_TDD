@@ -1,0 +1,538 @@
+namespace cloud.wm.core;
+
+entity Units {
+  key UnitCode     : String(3);
+      Commercial   : String(3);
+      Technical    : String(6);
+      MeasUnitText : localized String;
+      UnitText     : localized String;
+}
+
+entity Materials {
+  key Material                : String(50);
+      CreatedOn               : Date;
+      CreatedBy               : String(12);
+      LastChange              : Date;
+      ChangedBy               : String(12);
+      MaterialType            : String(4);
+      MaterialGroup           : String(9);
+      BaseUnitOfMeasure       : Association to Units;
+      OrderUnit               : Association to Units;
+      Document                : String(22);
+      DocumentType            : String(3);
+      SizeDimensions          : String(32);
+      BasicMaterial           : String(48);
+      IndustryStdDesc         : String(18);
+      LabOffice               : String(3);
+      PurchasingValueKey      : String(4);
+      GrossWeight             : Decimal(13, 3);
+      NetWeight               : Decimal(13, 3);
+      WeightUnit              : Association to Units;
+      Volume                  : Decimal(13, 3);
+      VolumeUnit              : Association to Units;
+      ContainerReqmts         : String(2);
+      StorageConditions       : String(2);
+      TempConditions          : String(2);
+      LowLevelCode            : String(3);
+      TransportationGroup     : String(4);
+      HazMaterialNumber       : String(18);
+      Division                : String(2);
+      EanNumber               : String(13);
+      ProcurementRule         : String(1);
+      SourceOfSupply          : String(1);
+      EanUpc                  : String(18);
+      EanCategory             : String(2);
+      Length                  : Decimal(13, 3);
+      Width                   : Decimal(13, 3);
+      Height                  : Decimal(13, 3);
+      UnitOfDimension         : Association to Units;
+      AllowedPkgWeight        : Decimal(13, 3);
+      UnitOfWeight            : Association to Units;
+      AllowedPkgVolume        : Decimal(13, 3);
+      VolumeUnit2             : Association to Units;
+      BatchManagement         : String(1);
+      PackagingMatType        : String(4);
+      MaximumLevel            : Decimal(3, 0);
+      MatlGrpPackmatls        : String(4);
+      AuthorizationGroup      : String(4);
+      ValidFrom               : Date;
+      ValidTo                 : Date;
+      XPlantMatlStatus        : Date;
+      XDistrchainStatus       : Date;
+      ValidFrom2              : Date;
+      MinRemShelfLife         : Decimal(4, 0);
+      TotalShelfLife          : Decimal(4, 0);
+      StoragePercentage       : Decimal(3, 0);
+      ContentUnit             : Association to Units;
+      NetContents             : Decimal(13, 0);
+      ComparisonPriceunit     : Decimal(5, 0);
+      InBulkLiquid            : String(1);
+      Closed                  : String(1);
+      PeriodIndForSled        : String(1);
+      RoundingRuleSled        : String(1);
+      ExpirationDate          : Date;
+      StandardHuType          : String(4);
+      WhStorageCondition      : String(2);
+      WhMaterialGroup         : String(4);
+      HandlingUnitType        : String(4);
+      VarbTareWeight          : String(1);
+      MaximumCapacity         : Decimal(15, 3);
+      OvercapacityToler       : Decimal(3, 1);
+      MaxPackLength           : Decimal(15, 3);
+      MaxPackWidth            : Decimal(15, 3);
+      MaxPackHeight           : Decimal(15, 3);
+      UnitOfMeasurement       : Association to Units;
+      CountryOfOrigin         : String(3);
+      QuarantineTimeUnit      : Association to Units;
+      QualityInspectionGroup  : String(4);
+      SerialNoProfile         : String(4);
+      LogisticsUnitOfMeasure  : Association to Units;
+      LoadingUnits            : String(8);
+      LoadingUnitGroup        : String(3);
+      MainSize                : String(20);
+      SecondSize              : String(20);
+      FreeCharactValue        : String(20);
+      CareCode                : String(16);
+      Brand                   : String(4);
+      CorporateBrand          : String(10);
+      BrandDenomination       : String(10);
+      BrandedActiveIngredient : String(10);
+      ProductTechnologyCenter : String(10);
+      HandlingUnitType2       : String(5);
+      SupportedWeight         : Decimal(15, 3);
+      UomSupportWeight        : Association to Units;
+      RfidStatus              : String(1);
+      ShortDescription        : String(20);
+      FieldDescription        : String(50);
+      MaterialDescription     : localized String;
+}
+
+entity MaterialStorageTypes {
+
+  key Material           : Association to Materials;
+  key WarehouseNumber    : Association to Warehouses;
+  key StorageType        : String(3);
+      StorageBin         : String(10);
+      MaximumBinQuantity : Decimal(13, 3);
+      MinimumBinQuantity : Decimal(13, 3);
+      ControlQuantity    : Decimal(13, 3);
+      ReplenishmentQty   : Decimal(13, 3);
+      PickingArea        : String(3);
+}
+
+
+entity MaterialWarehouses {
+  key Material           : Association to Materials;
+  key WarehouseNumber    : Association to Warehouses;
+      DelflagWarehseNo   : String(3);
+      StorageSectionInd  : String(3);
+      StockPlacement     : String(3);
+      StockRemoval       : String(3);
+      UnitOfMeasure      : Association to Units;
+      StorageUnitType    : String(3);
+      WmUnit             : Association to Units;
+      AllowAddnToStock   : String(1);
+      BulkStorage        : String(2);
+      CapacityUsage      : Decimal(11, 3);
+      CapconsumptionUnit : Association to Units;
+      PickingStorageType : String(3);
+      ProposedUomFromMat : String(1);
+      StepPicking        : String(1);
+}
+
+entity MaterialUnits {
+  key Material        : Association to Materials;
+  key Alternativeunit : Association to Units;
+      Numerator       : Decimal(5, 0);
+      Denominator     : Decimal(5, 0);
+      EanNumber       : String(15);
+      EanUpc          : String(20);
+      EanCategory     : String(5);
+      Length          : Decimal(13, 3);
+      Width           : Decimal(13, 3);
+      Height          : Decimal(13, 3);
+      Unit            : Association to Units;
+      Volume          : Decimal(13, 3);
+      VolumeUnit      : Association to Units;
+      GrossWeight     : Decimal(13, 3);
+      WeightUnit      : Association to Units;
+      LowerLevUnit    : Association to Units;
+      InternalChar    : String(10);
+      UomSortNo       : Integer;
+      LeadingUn       : String(1);
+      ValuatedUn      : String(1);
+      UnitsMeasUse    : String(1);
+      UnitOfMeasmnt   : Association to Units;
+      LogVariants     : String(1);
+      EanVariant      : String(2);
+      RemVolNest      : Decimal(3, 0);
+      MaxStackFact    : Integer;
+      CapacUsage      : Decimal(15, 3);
+      UomCategory     : String(1);
+}
+
+entity Warehouses {
+  key WarehouseNumber : String(3);
+      Region          : String(3);
+      WhseNoDescr     : localized String;
+}
+
+entity Quants {
+  key WarehouseNumber    : Association to Warehouses;
+  key Quant              : String(10);
+      Material           : Association to Materials;
+      Plant              : String(4);
+      Batch              : String(10);
+      StockCategory      : String(1);
+      StorageType        : String(3);
+      StorageBin         : String(10);
+      PutawayBlock       : String(1);
+      StockRemovalBlock  : String(1);
+      CurrentStockPlcmnt : String(1);
+      CurrentStkRemoval  : String(1);
+      InventoryActive    : String(1);
+      BlockingReason     : String(1);
+      LastMovement       : Date;
+      Time1              : Time;
+      TransferOrderItem  : String(4);
+      LastStockPlacement : Date;
+      LastStockRemoval   : Date;
+      Time2              : Time;
+      Time3              : Time;
+      LastAddtnToStock   : Date;
+      GrDate             : Date;
+      GrNumber           : String(10);
+      GoodsReceiptItem   : String(4);
+      StorageUnitType    : String(3);
+      BaseUnitOfMeasure  : Association to Units;
+      TotalStock         : Decimal(13, 3);
+      AvailableStock     : Decimal(13, 3);
+      StockForPutaway    : Decimal(13, 3);
+      PickQuantity       : Decimal(13, 3);
+      Weight             : Decimal(11, 3);
+      WeightUnit         : Association to Units;
+      TrNumber           : String(10);
+      InventoryRecord    : String(10);
+      InventoryItem      : String(4);
+      StorageUnit        : String(20);
+      SledBbd            : Date;
+      StorageLocation    : String(4);
+      GrDataInitial      : String(1);
+      TransferQuantity   : Decimal(13, 3);
+
+
+}
+
+entity StorageBins {
+  key WarehouseNumber    : Association to Warehouses;
+  key StorageType        : String(3);
+  key StorageBin         : String(10);
+      StorageSection     : String(3);
+      StorageBinType     : String(2);
+      BinSection         : String(1);
+      StockRemovalBlock  : String(1);
+      PutawayBlock       : String(1);
+      CurrentStockPlcmnt : String(1);
+      InventoryActive    : String(1);
+      NumberOfQuants     : Decimal(7, 0);
+      MaxnumberOfQuants  : Decimal(7, 0);
+      MaximumNoofSus     : Decimal(5, 0);
+      DynamicStorageBin  : String(1);
+      MaximumWeight      : Decimal(11, 3);
+      WeightUnit         : String(3);
+      OccupiedWeight     : Decimal(11, 3);
+      TotalCapacity      : Decimal(11, 3);
+      RemainingCapacity  : Decimal(11, 3);
+      PickingArea        : String(3);
+      Zone               : String(10);
+      XCoordinate        : Decimal(10, 3);
+      YCoordinate        : Decimal(10, 3);
+      ZCoordinate        : Decimal(10, 3);
+}
+
+entity StorageUnits {
+  key StorageUnit      : String(20);
+      WarehouseNumber  : Association to Warehouses;
+      StorUnitType     : String(3);
+      StorageType      : String(3);
+      StorageBin       : String(10);
+      RemovalBlock     : String(1);
+      PutawayBlock     : String(1);
+      Blkreason        : String(1);
+      Status           : String(1);
+      NoOfQuants       : Decimal(7, 0);
+      LastMovement     : Date;
+      Time             : Time;
+      ToNumber         : String(10);
+      Transorditem     : String(4);
+      OccupiedWeight   : Decimal(11, 3);
+      WeightUnit       : Association to Units;
+      BinPosition      : String(2);
+      OpenToItems      : Decimal(5, 0);
+      Group            : String(10);
+      PostingChgTy     : String(3);
+      PostingChgNin    : String(10);
+      CapacusageSut    : Decimal(11, 3);
+      OldCapacityUsage : Decimal(11, 3);
+      DestbinChgble    : String(1);
+      PosInTrBin       : String(2);
+      Quant            : String(10);
+      StortypeForgr    : String(3);
+      StorbinForGr     : String(10);
+      GrStatus         : String(1);
+      QuantsWOGr       : Decimal(7, 0);
+      Delivery         : String(10);
+
+}
+
+entity SalesDocuments {
+  key SalesDocument                  : String(10);
+      CreatedOn                      : Date;
+      Time                           : Time;
+      CreatedBy                      : String(12);
+      DocumentDate                   : Date;
+      SdDocumentCateg                : String(1);
+      TransactionGroup               : String(1);
+      SalesDocumentType              : String(4);
+      OrderReason                    : String(3);
+      NetValue                       : Decimal(15, 2);
+      DocumentCurrency               : Decimal(5, 0);
+      SalesOrganization              : String(4);
+      DistributionChannel            : String(2);
+      Division                       : String(2);
+      SalesGroup                     : String(3);
+      SalesOffice                    : String(4);
+      ValidFromDate                  : Date;
+      ValidToDate                    : Date;
+      RequestedDelivDate             : Date;
+      CompleteDelivery               : String(1);
+      ShippingConditions             : String(2);
+      PurchaseOrderNo                : String(20);
+      PurchaseOrderType              : String(4);
+      PurchaseOrderDate              : Date;
+      Supplement                     : String(4);
+      YourReference                  : String(12);
+      NameOfTheOrderer               : String(35);
+      SoldToParty                    : String(10);
+      ChangedOn                      : Date;
+      Reference                      : String(20);
+      Order                          : String(20);
+      ExpirationDate                 : Date;
+      Route                          : String(10);
+      RouteBalancingFlag             : String(1);
+      Route2                         : String(10);
+      DeliveringPlant                : String(10);
+      TransportationZone             : String(10);
+      HomogeneousNonHomogeneous      : String(1);
+      OrderCategory                  : String(2);
+      OrderPalletStatus              : String(1);
+      NoOfPalletsIncludingIntPallets : String(50);
+      WeightUnit                     : Association to Units;
+      VuInFootprints                 : Decimal(15, 3);
+      WeightOfTheFootprintInKg       : Decimal(15, 3);
+      VehicleType                    : String(5);
+      CalculatedWeight               : Decimal(15, 3);
+      WeightUnit2                    : Association to Units;
+      ArrivalDate                    : Date;
+      BusinessTransactionType        : String(50);
+      Description                    : String(50);
+      TransshipmentArrivalDate       : Date;
+      TransshipmentDepartDate        : Date;
+      TransshipmentPlaceOfArrival    : String(10);
+      TransshipmentPlaceOfLoading    : String(10);
+      TransshipmentTransportMean     : String(50);
+      To_SalesDocumentItems          : Association to many SalesDocumentItems
+                                         on To_SalesDocumentItems.SalesDocument = $self;
+}
+
+
+entity SalesDocumentItems {
+  key SalesDocument            : Association to SalesDocuments;
+  key SalesDocumentItem        : String(6);
+      Material                 : Association to Materials;
+      Batch                    : String(10);
+      MaterialGroup            : String(9);
+      Description              : String(40);
+      ItemCategory             : String(4);
+      ItemType                 : String(1);
+      ItmRelevforDeliv         : String(1);
+      RelevantForBilling       : String(1);
+      TargetQuantityUom        : Association to Units;
+      ConversionFactor         : Decimal(5);
+      ConversionFactor2        : Decimal(5);
+      BaseUnitOfMeasure        : Association to Units;
+      PurchaseOrderItem        : String(10);
+      CustomerMaterialNumber   : String(20);
+      DeliveryGroup            : String(3);
+      QuantityIsFixed          : String(1);
+      UnlimitedTolerance       : String(1);
+      OverdelivTolerance       : Decimal(3, 1);
+      UnderdelTolerance        : Decimal(3, 1);
+      BillingBlock             : String(2);
+      ReplacementPart          : String(1);
+      BillingMethCoPpc         : String(1);
+      Division                 : String(2);
+      BusinessArea             : String(4);
+      NetValue                 : Decimal(15, 2);
+      DocumentCurrency         : Decimal(5, 0);
+      Maxpartdeliveries        : Decimal(1, 0);
+      PartdlvItem              : String(1);
+      BatchSplitAllowed        : String(1);
+      OrderQuantity            : Decimal(15, 3);
+      RequiredDelivQty         : Decimal(15, 3);
+      SalesUnit                : Association to Units;
+      Numerator                : Decimal(5, 0);
+      Denominator              : Decimal(5, 0);
+      GrossWeight              : Decimal(15, 3);
+      NetWeight                : Decimal(15, 3);
+      WeightUnit               : Association to Units;
+      Volume                   : Decimal(15, 3);
+      VolumeUnit               : Association to Units;
+      OriginatingDocument      : String(10);
+      Item                     : String(6);
+      ReferenceDocument        : String(3);
+      ReferenceItem            : String(6);
+      CompleteReference        : String(1);
+      UpdateDocumentFlow       : String(1);
+      CompletionRule           : String(1);
+      DeliveryPriority         : String(2);
+      Plant                    : String(4);
+      StorageLocation          : String(4);
+      ShippingPointReceivingPt : String(4);
+      Route                    : String(6);
+      BomOrigin                : String(1);
+      BomKeyDate               : Date;
+      BillOfMaterial           : String(8);
+      BillOfMaterialItemNumber : Decimal(5, 0);
+      CreatedOn                : Date;
+      CreatedBy                : String(12);
+      Time                     : Time;
+      UnitOfMeasure            : Association to Units;
+      AvailabilityCheck        : String(2);
+      MaterialPricingGrp       : String(2);
+      AcctAssmtGrpMat          : String(2);
+      EanNumber                : String(13);
+      Pricing                  : String(1);
+      ValuationType            : String(10);
+      SeparateValuation        : String(1);
+      BatchManagement          : String(1);
+      MinimumDeliveryQty       : Decimal(13, 3);
+      ChangedOn                : Date;
+      EanUpc                   : String(18);
+      Order                    : String(12);
+      PlanningMaterial         : String(18);
+      PlanningPlant            : String(4);
+      ProductGroupUnit         : Association to Units;
+      BaseUnitOfMeasure2       : Association to Units;
+      Po                       : String(20);
+      LoadingPoint             : String(5);
+      CheckRoute               : String(1);
+      SalesOrderStatus         : String(1);
+      VehicleType              : String(10);
+      DeliveryDate             : Date;
+      TripIdNumber             : String(10);
+      SledBbd                  : Date;
+      Status                   : String(10);
+      ServiceLevelIndicator    : String(10);
+      TargetQuantity           : Decimal(13, 3);
+}
+
+
+entity Deliveries {
+  key Delivery                   : String(10);
+      Createdby                  : String(12);
+      Time                       : Time;
+      Createdon                  : Date;
+      Salesdistrict              : String(6);
+      ShippingpointReceivingpt   : String(4);
+      Salesorganization          : String(4);
+      Deliverytype               : String(4);
+      Completedelivery           : String(1);
+      Plandgdsmvmntdate          : Date;
+      Route                      : String(6);
+      Billingblock               : String(2);
+      Deliveryblock              : String(2);
+      Sddocumentcateg            : String(1);
+      Shippingconditions         : String(2);
+      ShipToparty                : String(10);
+      SoldToparty                : String(10);
+      Totalweight                : Decimal(15, 3);
+      Netweight                  : Decimal(15, 3);
+      Weightunit                 : Association to Units;
+      Volume                     : Decimal(15, 3);
+      Volumeunit                 : Association to Units;
+      Numberofpackages           : String(5);
+      Route2                     : String(6);
+      Warehousenumber            : Association to Warehouses;
+      IdDeliverysplitWarehouseno : String(1);
+      Salesorganization2         : String(4);
+      DistribChannel             : String(2);
+      ExternalDeliveryid         : String(35);
+      Order                      : String(12);
+      SearchProcedure            : String(6);
+      CorrectionDelivery         : String(1);
+      Procedure                  : String(6);
+      DocConditionNo             : String(10);
+      Netvalue                   : Decimal(15, 2);
+      RouteSchedule              : String(10);
+      ReceivingPlant             : String(4);
+      FinancialDocNo             : String(10);
+      PaymtGuarantProc           : String(4);
+      PickingTime                : Time;
+      TranspPlanTime             : Time;
+      LoadingTime                : Time;
+      GoodsissueTime             : Time;
+      DoorforWhseNo              : String(3);
+      ShipmentInformationStatus  : String(1);
+      ReturnsasnCancelled        : String(1);
+      GoodsIssueTime2            : Time;
+      TimeZone                   : String(6);
+      StatusDecentWhse           : String(1);
+      ScenarioLogisticExecution  : String(1);
+      OriginalSystemType         : String(1);
+      LastChangerSystemType      : String(1);
+      GeographicalRoute          : String(10);
+      ChgIndforRoute             : String(1);
+      DeliveryDate               : Date;
+      To_DeliveryItems           : Association to many DeliveryItems
+                                     on To_DeliveryItems.Delivery = $self;
+}
+
+entity DeliveryItems {
+  key Delivery             : Association to Deliveries;
+  key Item                 : String(6);
+      ItemCategory         : String(4);
+      CreatedBy            : String(12);
+      Time                 : Time;
+      CreatedOn            : Date;
+      Material             : Association to Materials;
+      Plant                : String(14);
+      StorageLocation      : String(4);
+      Batch                : String(10);
+      DeliveryQuantity     : Decimal(13, 3);
+      BaseUnitOfMeasure    : Association to Units;
+      SalesUnit            : Association to Units;
+      Numerator            : Decimal(5);
+      Denominator          : Decimal(5);
+      NetWeight            : Decimal(15, 3);
+      GrossWeight          : Decimal(15, 3);
+      WeightUnit           : Association to Units;
+      Volume               : Decimal(15, 3);
+      VolumeUnit           : Association to Units;
+      PartdlvItem          : String(1);
+      WarehouseNumber      : Association to Warehouses;
+      SplitToWarehouseNo   : String(1);
+      StorageType          : String(3);
+      StorageBin           : String(10);
+      MovementType         : String(3);
+      MovementType2        : String(3);
+      IndDynamicBin        : String(1);
+      SalesOrder           : Association to SalesDocuments;
+      SalesOrderItem       : String(6);
+      To_SalesDocumentItem : Association to SalesDocumentItems
+                               on  To_SalesDocumentItem.SalesDocument     = SalesOrder
+                               and To_SalesDocumentItem.SalesDocumentItem = SalesOrderItem;
+
+
+}
+
