@@ -532,7 +532,5 @@ entity DeliveryItems {
       To_SalesDocumentItem : Association to SalesDocumentItems
                                on  To_SalesDocumentItem.SalesDocument     = SalesOrder
                                and To_SalesDocumentItem.SalesDocumentItem = SalesOrderItem;
-
-
 }
 

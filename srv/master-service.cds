@@ -18,4 +18,5 @@ service CloudWMService {
 
     action materialsBatchPost(materials : array of Materials) returns String;
     action unitsBatchPost(units : array of Units) returns String;
+    action MaterialStorageTypesPost(MaterialStorageTypes : array of MaterialStorageTypes) returns String;
 }
