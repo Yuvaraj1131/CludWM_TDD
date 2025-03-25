@@ -53,7 +53,7 @@ module.exports = cds.service.impl(async function () {
 
     async function _MaterialStorageTypesPost(req) {
         try {
-            if (req.data?.Materials?.length > 0) {
+            if (req.data?.MaterialStorageTypes?.length > 0) {
                 await _batchUpsert(req.data.units, MaterialStorageTypes);
             }
             else {
