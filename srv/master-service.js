@@ -2,8 +2,8 @@ const cds = require('@sap/cds');
 const { entity } = require('@sap/cds/lib/core/entities');
 module.exports = cds.service.impl(async function () {
     //Entities defination from master and core entity
-    const { Units, Materials } = this.entities;
-    async function _materialsBatchPost(req){
+    const { Units, Materials, MaterialStorageTypes } = this.entities;
+    async function _materialsBatchPost(req) {
         console.log(req);
     }
 
@@ -12,35 +12,55 @@ module.exports = cds.service.impl(async function () {
      * @param { HTTP Request } req 
      */
 
-    async function _unitsBatchPost(req){
-        try{
-            if(req.data?.units?.length > 0){
-                await _batchUpsert(req.data.units,Units);
+    async function _unitsBatchPost(req) {
+        try {
+            if (req.data?.units?.length > 0) {
+                await _batchUpsert(req.data.units, Units);
             }
-            else{
+            else {
                 req.reject("Units data set is empty. Ensure that units are provided in the correct format before proceeding.");
             }
         }
-        catch(error){
+        catch (error) {
             req.reject(error.message);
         }
     }
 
     /**
-     * @param {HTTP} req 
+     * @param { HTTP Request } req 
      * It handles bulk update/insert of Materials
      */
 
-    async function _materialsBatchPost(req){
-        try{
-            if(req.data?.Materials?.length > 0){
-                await _batchUpsert(req.data.units,Materials);
+    async function _materialsBatchPost(req) {
+        try {
+            if (req.data?.Materials?.length > 0) {
+                await _batchUpsert(req.data.Materials, Materials);
             }
-            else{
+            else {
                 req.reject("Materials data set is empty. Ensure that units are provided in the correct format before proceeding.");
             }
         }
-        catch(error){
+        catch (error) {
+            req.reject(error.message);
+        }
+    }
+
+    /**
+     * It handles bulk update/insert of materialstoragetypes
+     * @param { HTTP Request } req
+     * 
+     */
+
+    async function _MaterialStorageTypesPost(req) {
+        try {
+            if (req.data?.MaterialStorageTypes?.length > 0) {
+                await _batchUpsert(req.data.MaterialStorageTypes, MaterialStorageTypes);
+            }
+            else {
+                req.reject("Materials Storage Types data set is empty. Ensure that units are provided in the correct format before proceeding.");
+            }
+        }
+        catch (error) {
             req.reject(error.message);
         }
     }
@@ -51,16 +71,20 @@ module.exports = cds.service.impl(async function () {
      * @param { Array of Object } data 
      * @param { entity } table 
      */
-    async function _batchUpsert(data, table){
-        try{
+
+    async function _batchUpsert(data, table) {
+        try {
             await UPSERT.into(table)
-                         .entries(data);
+                .entries(data);
         }
-        catch(error){
+        catch (error) {
             throw error;
         }
     }
 
+
+
     this.on('materialsBatchPost', _materialsBatchPost.bind(this));
     this.on('unitsBatchPost', _unitsBatchPost.bind(this));
+    this.on('MaterialStorageTypesPost', _MaterialStorageTypesPost.bind(this));
 })
