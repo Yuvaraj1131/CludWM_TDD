@@ -34,7 +34,7 @@ module.exports = cds.service.impl(async function () {
     async function _materialsBatchPost(req) {
         try {
             if (req.data?.Materials?.length > 0) {
-                await _batchUpsert(req.data.units, Materials);
+                await _batchUpsert(req.data.Materials, Materials);
             }
             else {
                 req.reject("Materials data set is empty. Ensure that units are provided in the correct format before proceeding.");
@@ -54,7 +54,7 @@ module.exports = cds.service.impl(async function () {
     async function _MaterialStorageTypesPost(req) {
         try {
             if (req.data?.MaterialStorageTypes?.length > 0) {
-                await _batchUpsert(req.data.units, MaterialStorageTypes);
+                await _batchUpsert(req.data.MaterialStorageTypes, MaterialStorageTypes);
             }
             else {
                 req.reject("Materials Storage Types data set is empty. Ensure that units are provided in the correct format before proceeding.");
