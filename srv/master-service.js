@@ -67,6 +67,47 @@ module.exports = cds.service.impl(async function () {
 
 
     /**
+    * It handles bulk update/insert of MaterialWarehouses
+    * @param { HTTP Request } req
+    * 
+    */
+
+    async function _MaterialWarehousesPost(req) {
+        try {
+            if (req.data?.MaterialWarehouses?.length > 0) {
+                await _batchUpsert(req.data.MaterialWarehouses, MaterialWarehouses);
+            }
+            else {
+                req.reject("Materials Storage Types data set is empty. Ensure that units are provided in the correct format before proceeding.");
+            }
+        }
+        catch (error) {
+            req.reject(error.message);
+        }
+    }
+
+
+    /**
+  * It handles bulk update/insert of MaterialUnits
+  * @param { HTTP Request } req
+  * 
+  */
+
+    async function _MaterialUnitsPost(req) {
+        try {
+            if (req.data?.MaterialUnits?.length > 0) {
+                await _batchUpsert(req.data.MaterialUnits, MaterialUnits);
+            }
+            else {
+                req.reject("Materials Storage Types data set is empty. Ensure that units are provided in the correct format before proceeding.");
+            }
+        }
+        catch (error) {
+            req.reject(error.message);
+        }
+    }
+
+    /**
      * Generic function which can handle the update/insert of bulk data
      * @param { Array of Object } data 
      * @param { entity } table 
@@ -82,9 +123,9 @@ module.exports = cds.service.impl(async function () {
         }
     }
 
-
-
     this.on('materialsBatchPost', _materialsBatchPost.bind(this));
     this.on('unitsBatchPost', _unitsBatchPost.bind(this));
     this.on('MaterialStorageTypesPost', _MaterialStorageTypesPost.bind(this));
+    this.on('MaterialWarehousesPost', _MaterialWarehousesPost.bind(this));
+    this.on('MaterialUnitsPost', _MaterialUnitsPost.bind(this));
 })

@@ -15,8 +15,9 @@ service CloudWMService {
     entity SalesDocumentItem    as projection on wm.SalesDocumentItems;
     entity Deliveries           as projection on wm.Deliveries;
     entity DeliveriesItem       as projection on wm.DeliveryItems;
-
-    action materialsBatchPost(materials : array of Materials) returns String;
-    action unitsBatchPost(units : array of Units) returns String;
+    action materialsBatchPost(materials : array of Materials)                             returns String;
+    action unitsBatchPost(units : array of Units)                                         returns String;
     action MaterialStorageTypesPost(MaterialStorageTypes : array of MaterialStorageTypes) returns String;
+    action MaterialWarehousesPost(MaterialWarehouses : array of MaterialWarehouses)       returns String;
+    action MaterialUnitsPost(MaterialUnits : array of MaterialUnits)                      returns String;
 }
