@@ -70,7 +70,7 @@ entity Materials {
       Closed                  : String(1);
       PeriodIndForSled        : String(1);
       RoundingRuleSled        : String(1);
-      ExpirationDate          : Date;
+      ExpirationDate          : String(1);
       StandardHuType          : String(4);
       WhStorageCondition      : String(2);
       WhMaterialGroup         : String(4);
