@@ -494,6 +494,8 @@ entity Deliveries {
       GeographicalRoute          : String(10);
       ChgIndforRoute             : String(1);
       DeliveryDate               : Date;
+      OrderSequence              : Integer;
+      Zroute                     : String(6);
       To_DeliveryItems           : Association to many DeliveryItems
                                      on To_DeliveryItems.Delivery = $self;
 }
@@ -533,4 +535,3 @@ entity DeliveryItems {
                                on  To_SalesDocumentItem.SalesDocument     = SalesOrder
                                and To_SalesDocumentItem.SalesDocumentItem = SalesOrderItem;
 }
-
