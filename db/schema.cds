@@ -296,7 +296,7 @@ entity SalesDocuments {
       SalesDocumentType              : String(4);
       OrderReason                    : String(3);
       NetValue                       : Decimal(15, 2);
-      DocumentCurrency               : Decimal(5, 0);
+      DocumentCurrency               : String(5);
       SalesOrganization              : String(4);
       DistributionChannel            : String(2);
       Division                       : String(2);
@@ -374,7 +374,7 @@ entity SalesDocumentItems {
       Division                 : String(2);
       BusinessArea             : String(4);
       NetValue                 : Decimal(15, 2);
-      DocumentCurrency         : Decimal(5, 0);
+      DocumentCurrency         : String(5);
       Maxpartdeliveries        : Decimal(1, 0);
       PartdlvItem              : String(1);
       BatchSplitAllowed        : String(1);
