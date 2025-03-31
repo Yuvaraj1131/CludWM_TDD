@@ -14,8 +14,8 @@ module.exports = cds.service.impl(async function () {
 
     async function _unitsBatchPost(req) {
         try {
-            if (req.data?.units?.length > 0) {
-                await _batchUpsert(req.data.units, Units);
+            if (req.data?.Units?.length > 0) {
+                await _batchUpsert(req.data.Units, Units);
             }
             else {
                 req.reject("Units data set is empty. Ensure that units are provided in the correct format before proceeding.");
