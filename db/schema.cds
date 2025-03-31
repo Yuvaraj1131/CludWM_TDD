@@ -495,7 +495,6 @@ entity Deliveries {
       ChgIndforRoute             : String(1);
       DeliveryDate               : Date;
       OrderSequence              : Integer;
-      Zroute                     : String(6);
       To_DeliveryItems           : Association to many DeliveryItems
                                      on To_DeliveryItems.Delivery = $self;
 }
