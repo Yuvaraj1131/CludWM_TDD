@@ -41,9 +41,11 @@
       "db": "hana",
       "connectivity": true,
       "destinations": true,
-      "server": {
-        "body_parser": {
-          "limit": "10mb"
+      "cds": {
+        "server": {
+          "body_parser": {
+            "limit": "10mb"
+          }
         }
       }
     },
