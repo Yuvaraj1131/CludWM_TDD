@@ -124,14 +124,14 @@ entity MaterialStorageTypes {
 entity MaterialWarehouses {
   key Material           : Association to Materials;
   key WarehouseNumber    : Association to Warehouses;
-      DelflagWarehseNo   : String(3);
+      DelflagWarehseNo   : Boolean;
       StorageSectionInd  : String(3);
       StockPlacement     : String(3);
       StockRemoval       : String(3);
       UnitOfMeasure      : Association to Units;
       StorageUnitType    : String(3);
       WmUnit             : Association to Units;
-      AllowAddnToStock   : String(1);
+      AllowAddnToStock   : Boolean;
       BulkStorage        : String(2);
       CapacityUsage      : Decimal(11, 3);
       CapconsumptionUnit : Association to Units;
