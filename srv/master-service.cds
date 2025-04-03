@@ -9,7 +9,7 @@ service CloudWMService {
     entity MaterialUnits        as projection on wm.MaterialUnits;
     entity Warehouses           as projection on wm.Warehouses;
     entity quants               as projection on wm.Quants;
-    entity StorageBin           as projection on wm.StorageBins;
+    entity StorageBins          as projection on wm.StorageBins;
     entity StorageUnits         as projection on wm.StorageUnits;
     entity SalesDocument        as projection on wm.SalesDocuments;
     entity SalesDocumentItem    as projection on wm.SalesDocumentItems;
@@ -20,4 +20,6 @@ service CloudWMService {
     action MaterialStorageTypesPost(MaterialStorageTypes : array of MaterialStorageTypes) returns String;
     action MaterialWarehousesPost(MaterialWarehouses : array of MaterialWarehouses)       returns String;
     action MaterialUnitsPost(MaterialUnits : array of MaterialUnits)                      returns String;
+    action StorageBinPost(StorageBins : array of StorageBins)                             returns String;
+    action StorageUnitsPost(StorageUnits : array of StorageUnits)                         returns String;
 }

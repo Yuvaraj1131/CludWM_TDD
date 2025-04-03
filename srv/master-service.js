@@ -2,7 +2,7 @@ const cds = require('@sap/cds');
 const { entity } = require('@sap/cds/lib/core/entities');
 module.exports = cds.service.impl(async function () {
     //Entities defination from master and core entity
-    const { Units, Materials, MaterialStorageTypes } = this.entities;
+    const { Units, Materials, MaterialStorageTypes, MaterialWarehouses, MaterialUnits, StorageBins, StorageUnits } = this.entities;
     async function _materialsBatchPost(req) {
         console.log(req);
     }
@@ -65,7 +65,6 @@ module.exports = cds.service.impl(async function () {
         }
     }
 
-
     /**
     * It handles bulk update/insert of MaterialWarehouses
     * @param { HTTP Request } req
@@ -78,7 +77,7 @@ module.exports = cds.service.impl(async function () {
                 await _batchUpsert(req.data.MaterialWarehouses, MaterialWarehouses);
             }
             else {
-                req.reject("Materials Storage Types data set is empty. Ensure that units are provided in the correct format before proceeding.");
+                req.reject("Materials Warehouse data set is empty. Ensure that units are provided in the correct format before proceeding.");
             }
         }
         catch (error) {
@@ -88,10 +87,10 @@ module.exports = cds.service.impl(async function () {
 
 
     /**
-  * It handles bulk update/insert of MaterialUnits
-  * @param { HTTP Request } req
-  * 
-  */
+    * It handles bulk update/insert of MaterialUnits
+    * @param { HTTP Request } req
+    * 
+    */
 
     async function _MaterialUnitsPost(req) {
         try {
@@ -99,7 +98,43 @@ module.exports = cds.service.impl(async function () {
                 await _batchUpsert(req.data.MaterialUnits, MaterialUnits);
             }
             else {
-                req.reject("Materials Storage Types data set is empty. Ensure that units are provided in the correct format before proceeding.");
+                req.reject("Material Units data set is empty. Ensure that units are provided in the correct format before proceeding.");
+            }
+        }
+        catch (error) {
+            req.reject(error.message);
+        }
+    }
+
+    /**
+     * It handles bulk insert/Update of StorageBins
+     * @param {Http req } req 
+     */
+    async function _StorageBinPost(req) {
+        try {
+            if (req.data?.StorageBins?.length > 0) {
+                await _batchUpsert(req.data.StorageBins, StorageBins);
+            }
+            else {
+                req.reject("Storage Bin data set is empty. Ensure that units are provided in the correct format before proceeding.");
+            }
+        }
+        catch (error) {
+            req.reject(error.message);
+        }
+    }
+
+    /**
+     * It handles bulk insert/Update of StorageUnits
+     * @param {Http req } req 
+     */
+    async function _StorageUnitsPost(req) {
+        try {
+            if (req.data?.StorageUnits?.length > 0) {
+                await _batchUpsert(req.data.StorageUnits, StorageUnits);
+            }
+            else {
+                req.reject("Storage Units data set is empty. Ensure that units are provided in the correct format before proceeding.");
             }
         }
         catch (error) {
@@ -128,4 +163,6 @@ module.exports = cds.service.impl(async function () {
     this.on('MaterialStorageTypesPost', _MaterialStorageTypesPost.bind(this));
     this.on('MaterialWarehousesPost', _MaterialWarehousesPost.bind(this));
     this.on('MaterialUnitsPost', _MaterialUnitsPost.bind(this));
+    this.on('StorageBinPost', _StorageBinPost.bind(this));
+    this.on('StorageUnitsPost', _StorageUnitsPost.bind(this));
 })
