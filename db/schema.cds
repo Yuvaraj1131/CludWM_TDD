@@ -50,7 +50,7 @@ entity Materials {
       UnitOfWeight            : Association to Units;
       AllowedPkgVolume        : Decimal(13, 3);
       VolumeUnit2             : Association to Units;
-      BatchManagement         : Boolean;
+      BatchManagement         : String(1);
       PackagingMatType        : String(4);
       MaximumLevel            : Decimal(3, 3);
       MatlGrpPackmatls        : String(4);
@@ -66,8 +66,8 @@ entity Materials {
       ContentUnit             : Association to Units;
       NetContents             : Decimal(13, 3);
       ComparisonPriceunit     : Decimal(5, 0);
-      InBulkLiquid            : Boolean;
-      Closed                  : Boolean;
+      InBulkLiquid            : String(1);
+      Closed                  : String(1);
       PeriodIndForSled        : String(1);
       RoundingRuleSled        : String(1);
       ExpirationDate          : String(1);
@@ -75,7 +75,7 @@ entity Materials {
       WhStorageCondition      : String(2);
       WhMaterialGroup         : String(4);
       HandlingUnitType        : String(4);
-      VarbTareWeight          : Boolean;
+      VarbTareWeight          : String(1);
       MaximumCapacity         : Decimal(15, 3);
       OvercapacityToler       : Decimal(3, 1);
       MaxPackLength           : Decimal(15, 3);
@@ -124,14 +124,14 @@ entity MaterialStorageTypes {
 entity MaterialWarehouses {
   key Material           : Association to Materials;
   key WarehouseNumber    : Association to Warehouses;
-      DelflagWarehseNo   : Boolean;
+      DelflagWarehseNo   : String(1);
       StorageSectionInd  : String(3);
       StockPlacement     : String(3);
       StockRemoval       : String(3);
       UnitOfMeasure      : Association to Units;
-      StorageUnitType    : String(3);
+      StorageUnitType    : String(3); 
       WmUnit             : Association to Units;
-      AllowAddnToStock   : Boolean;
+      AllowAddnToStock   : String(1);
       BulkStorage        : String(2);
       CapacityUsage      : Decimal(11, 3);
       CapconsumptionUnit : Association to Units;
@@ -236,7 +236,7 @@ entity StorageBins {
       InventoryActive    : String(1);
       NumberOfQuants     : Decimal(7, 0);
       MaxnumberOfQuants  : Decimal(7, 0);
-      MaximumNoofSus     : Decimal(5, 0);
+      MaximumNoofSus     : Decimal(5, 3);
       DynamicStorageBin  : String(1);
       MaximumWeight      : Decimal(11, 3);
       WeightUnit         : String(3);
