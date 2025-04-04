@@ -220,7 +220,6 @@ entity Quants {
       GrDataInitial      : String(1);
       TransferQuantity   : Decimal(13, 3);
 
-
 }
 
 entity StorageBins {
