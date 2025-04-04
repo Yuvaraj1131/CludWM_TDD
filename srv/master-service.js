@@ -2,7 +2,7 @@ const cds = require('@sap/cds');
 const { entity } = require('@sap/cds/lib/core/entities');
 module.exports = cds.service.impl(async function () {
     //Entities defination from master and core entity
-    const { Units, Materials, MaterialStorageTypes, MaterialWarehouses, MaterialUnits, StorageBins, StorageUnits } = this.entities;
+    const { Units, Materials, MaterialStorageTypes, MaterialWarehouses, MaterialUnits, StorageBins, StorageUnits, Warehouses } = this.entities;
     async function _materialsBatchPost(req) {
         console.log(req);
     }
@@ -126,7 +126,7 @@ module.exports = cds.service.impl(async function () {
 
     /**
      * It handles bulk insert/Update of StorageUnits
-     * @param {Http req } req 
+     * @param { Http req } req 
      */
     async function _StorageUnitsPost(req) {
         try {
@@ -141,6 +141,25 @@ module.exports = cds.service.impl(async function () {
             req.reject(error.message);
         }
     }
+
+    /**
+     * It handles bulk insert/update of Warehouses
+     * @param { Http req } req
+     */
+    async function _WarehousesPost(req) {
+        try {
+            if (req.data?.Warehouses?.length > 0) {
+                await _batchUpsert(req.data.Warehouses, Warehouses);
+            }
+            else {
+                req.reject("Warehouses data set is empty.Ensure that units are provided in the correct format before proceeding.")
+            }
+        }
+        catch (error) {
+            req.reject(error.message);
+        }
+    }
+
 
     /**
      * Generic function which can handle the update/insert of bulk data
@@ -165,4 +184,5 @@ module.exports = cds.service.impl(async function () {
     this.on('MaterialUnitsPost', _MaterialUnitsPost.bind(this));
     this.on('StorageBinPost', _StorageBinPost.bind(this));
     this.on('StorageUnitsPost', _StorageUnitsPost.bind(this));
+    this.on('WarehousesPost', _WarehousesPost.bind(this));
 })

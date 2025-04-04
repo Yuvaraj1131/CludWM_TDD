@@ -22,4 +22,5 @@ service CloudWMService {
     action MaterialUnitsPost(MaterialUnits : array of MaterialUnits)                      returns String;
     action StorageBinPost(StorageBins : array of StorageBins)                             returns String;
     action StorageUnitsPost(StorageUnits : array of StorageUnits)                         returns String;
+    action WarehousesPost(Warehouses : array of Warehouses)                               returns String;
 }
