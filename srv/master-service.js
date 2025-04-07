@@ -1,10 +1,9 @@
 const cds = require('@sap/cds');
 const { entity } = require('@sap/cds/lib/core/entities');
-const { RequestError } = require('@sap/xssec/types/error');
 module.exports = cds.service.impl(async function () {
     //Entities defination from master and core entity
     const { Units, Materials, MaterialStorageTypes, MaterialWarehouses, MaterialUnits, StorageBins, StorageUnits, Warehouses,
-        SalesDocument, SalesDocumentItem, Deliveries, DeliveriesItem } = this.entities;
+        SalesDocuments, SalesDocumentItems, Deliveries, DeliveryItems } = this.entities;
     async function _materialsBatchPost(req) {
         console.log(req);
     }
@@ -169,8 +168,8 @@ module.exports = cds.service.impl(async function () {
 
     async function _SalesDocumentPost(req) {
         try {
-            if (req.data?.SalesDocument?.length > 0) {
-                await _batchUpsert(req.data.SalesDocument, SalesDocument);
+            if (req.data?.SalesDocuments?.length > 0) {
+                await _batchUpsert(req.data.SalesDocuments, SalesDocuments);
             }
             else {
                 req.reject("SalesDocument data is empty.Ensure that Sales Document are provided in the correct format.")
@@ -189,8 +188,8 @@ module.exports = cds.service.impl(async function () {
 
     async function _SalesDocumentItemPost(req) {
         try {
-            if (req.data?.SalesDocumentItem?.length > 0) {
-                await _batchUpsert(Req.data.SalesDocumentItem, SalesDocumentItem);
+            if (req.data?.SalesDocumentItems?.length > 0) {
+                await _batchUpsert(req.data.SalesDocumentItems, SalesDocumentItems);
             }
             else {
                 req.reject("SalesDocumentItem data is empty.Ensure that Sales Document Item are provided in the correct format.")
@@ -209,7 +208,7 @@ module.exports = cds.service.impl(async function () {
     async function _DeliveriesPost(req) {
         try {
             if (req.data?.Deliveries?.length > 0) {
-                await _batchUpsert(Req.data.Deliveries, Deliveries);
+                await _batchUpsert(req.data.Deliveries, Deliveries);
             }
             else {
                 req.reject("Deliveries data is empty.Ensure that Deliveries are provided in the correct format.")
@@ -227,11 +226,11 @@ module.exports = cds.service.impl(async function () {
 
     async function _DeliveriesItemPost(req) {
         try {
-            if (req.data?.DeliveriesItem?.length > 0) {
-                await _batchUpsert(Req.data.DeliveriesItem, DeliveriesItem);
+            if (req.data?.DeliveryItems?.length > 0) {
+                await _batchUpsert(req.data.DeliveriesItem, DeliveryItems);
             }
             else {
-                req.reject("DeliveriesItem data is empty.Ensure that DeliveriesItem are provided in the correct format.")
+                req.reject("Delivery Item data is empty.Ensure that DeliveriesItem are provided in the correct format.")
             }
         }
         catch (error) {
@@ -266,7 +265,7 @@ module.exports = cds.service.impl(async function () {
     this.on('StorageUnitsPost', _StorageUnitsPost.bind(this));
     this.on('WarehousesPost', _WarehousesPost.bind(this));
     this.on('DeliveriesPost', _DeliveriesPost.bind(this));
-    this.on('DeliveriesItemPost', _DeliveriesItemPost.bind(this));
-    this.on('SalesOrderPost', _SalesDocumentPost.bind(this));
-    this.on('SalesOrderItemPost', _SalesDocumentItemPost.bind(this));
+    this.on('DeliveryItemsPost', _DeliveriesItemPost.bind(this));
+    this.on('SalesOrdersPost', _SalesDocumentPost.bind(this));
+    this.on('SalesOrderItemsPost', _SalesDocumentItemPost.bind(this));
 })

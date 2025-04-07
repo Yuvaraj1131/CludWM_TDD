@@ -11,10 +11,11 @@ service CloudWMService {
     entity quants               as projection on wm.Quants;
     entity StorageBins          as projection on wm.StorageBins;
     entity StorageUnits         as projection on wm.StorageUnits;
-    entity SalesDocument        as projection on wm.SalesDocuments;
-    entity SalesDocumentItem    as projection on wm.SalesDocumentItems;
+    entity SalesDocuments       as projection on wm.SalesDocuments;
+    entity SalesDocumentItems   as projection on wm.SalesDocumentItems;
     entity Deliveries           as projection on wm.Deliveries;
-    entity DeliveriesItem       as projection on wm.DeliveryItems;
+    entity DeliveryItems        as projection on wm.DeliveryItems;
+
     action materialsBatchPost(Materials : array of Materials)                             returns String;
     action unitsBatchPost(Units : array of Units)                                         returns String;
     action MaterialStorageTypesPost(MaterialStorageTypes : array of MaterialStorageTypes) returns String;
@@ -23,8 +24,8 @@ service CloudWMService {
     action StorageBinPost(StorageBins : array of StorageBins)                             returns String;
     action StorageUnitsPost(StorageUnits : array of StorageUnits)                         returns String;
     action WarehousesPost(Warehouses : array of Warehouses)                               returns String;
-    action SalesDocumentPost(SalesDocument : array of SalesDocument)                      returns String;
-    action SalesDocumentItemPost(SalesDocumentItem : array of SalesDocumentItem)          returns String;
+    action SalesDocumentsPost(SalesDocuments : array of SalesDocuments)                      returns String;
+    action SalesDocumentItemPost(SalesDocumentItems : array of SalesDocumentItems)          returns String;
     action DeliveriesPost(Deliveries : array of Deliveries)                               returns String;
-    action DeliveriesItemPost(Deliveries : array of DeliveriesItem)                       returns String;
+    action DeliveryItemsPost(Deliveries : array of DeliveryItems)                       returns String;
 }
