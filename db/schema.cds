@@ -389,7 +389,7 @@ entity SalesDocumentItems {
       VolumeUnit               : Association to Units;
       OriginatingDocument      : String(10);
       Item                     : String(6);
-      ReferenceDocument        : String(3);
+      ReferenceDocument        : String(10);
       ReferenceItem            : String(6);
       CompleteReference        : String(1);
       UpdateDocumentFlow       : String(1);
@@ -443,7 +443,7 @@ entity Deliveries {
       Time                       : Time;
       Createdon                  : Date;
       Salesdistrict              : String(6);
-      ShippingpointReceivingpt   : String(4);
+      Shippingpoint              : String(4);
       Salesorganization          : String(4);
       Deliverytype               : String(4);
       Completedelivery           : String(1);
@@ -463,7 +463,7 @@ entity Deliveries {
       Numberofpackages           : String(5);
       Route2                     : String(6);
       Warehousenumber            : Association to Warehouses;
-      IdDeliverysplitWarehouseno : String(1);
+      IdDeliverysplit            : String(1);
       Salesorganization2         : String(4);
       DistribChannel             : String(2);
       ExternalDeliveryid         : String(35);
@@ -472,7 +472,7 @@ entity Deliveries {
       CorrectionDelivery         : String(1);
       Procedure                  : String(6);
       DocConditionNo             : String(10);
-      Netvalue                   : Decimal(15, 2);
+      Netvalue                   : Decimal(15, 3);
       RouteSchedule              : String(10);
       ReceivingPlant             : String(4);
       FinancialDocNo             : String(10);
@@ -493,7 +493,7 @@ entity Deliveries {
       GeographicalRoute          : String(10);
       ChgIndforRoute             : String(1);
       DeliveryDate               : Date;
-      OrderSequence              : Integer;
+      SequenceRoute             : Integer;
       To_DeliveryItems           : Association to many DeliveryItems
                                      on To_DeliveryItems.Delivery = $self;
 }
