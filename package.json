@@ -47,7 +47,7 @@
     },
     "server": {
       "body_parser": {
-        "limit": "100mb"
+        "limit": "10mb"
       }
     }
   }
