@@ -166,7 +166,7 @@ module.exports = cds.service.impl(async function () {
      * @param { Http req } req
      */
 
-    async function _SalesDocumentPost(req) {
+    async function _SalesDocumentsPost(req) {
         try {
             if (req.data?.SalesDocuments?.length > 0) {
                 await _batchUpsert(req.data.SalesDocuments, SalesDocuments);
@@ -239,7 +239,6 @@ module.exports = cds.service.impl(async function () {
     }
 
 
-
     /**
      * Generic function which can handle the update/insert of bulk data
      * @param { Array of Object } data 
@@ -266,6 +265,6 @@ module.exports = cds.service.impl(async function () {
     this.on('WarehousesPost', _WarehousesPost.bind(this));
     this.on('DeliveriesPost', _DeliveriesPost.bind(this));
     this.on('DeliveryItemsPost', _DeliveriesItemPost.bind(this));
-    this.on('SalesOrdersPost', _SalesDocumentPost.bind(this));
-    this.on('SalesOrderItemsPost', _SalesDocumentItemPost.bind(this));
+    this.on('SalesDocumentsPost', _SalesDocumentsPost.bind(this));
+    this.on('SalesDocumentItemPost', _SalesDocumentItemPost.bind(this));
 })

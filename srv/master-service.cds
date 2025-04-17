@@ -15,7 +15,6 @@ service CloudWMService {
     entity SalesDocumentItems   as projection on wm.SalesDocumentItems;
     entity Deliveries           as projection on wm.Deliveries;
     entity DeliveryItems        as projection on wm.DeliveryItems;
-
     action materialsBatchPost(Materials : array of Materials)                             returns String;
     action unitsBatchPost(Units : array of Units)                                         returns String;
     action MaterialStorageTypesPost(MaterialStorageTypes : array of MaterialStorageTypes) returns String;
@@ -24,8 +23,8 @@ service CloudWMService {
     action StorageBinPost(StorageBins : array of StorageBins)                             returns String;
     action StorageUnitsPost(StorageUnits : array of StorageUnits)                         returns String;
     action WarehousesPost(Warehouses : array of Warehouses)                               returns String;
-    action SalesDocumentsPost(SalesDocuments : array of SalesDocuments)                      returns String;
-    action SalesDocumentItemPost(SalesDocumentItems : array of SalesDocumentItems)          returns String;
+    action SalesDocumentsPost(SalesDocuments : array of SalesDocuments)                   returns String;
+    action SalesDocumentItemPost(SalesDocumentItems : array of SalesDocumentItems)        returns String;
     action DeliveriesPost(Deliveries : array of Deliveries)                               returns String;
-    action DeliveryItemsPost(Deliveries : array of DeliveryItems)                       returns String;
+    action DeliveryItemsPost(Deliveries : array of DeliveryItems)                         returns String;
 }
