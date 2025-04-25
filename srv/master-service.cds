@@ -26,5 +26,5 @@ service CloudWMService {
     action SalesDocumentsPost(SalesDocuments : array of SalesDocuments)                   returns String;
     action SalesDocumentItemPost(SalesDocumentItems : array of SalesDocumentItems)        returns String;
     action DeliveriesPost(Deliveries : array of Deliveries)                               returns String;
-    action DeliveryItemsPost(Deliveries : array of DeliveryItems)                         returns String;
+    action DeliveryItemsPost(DeliveryItems : array of DeliveryItems)                      returns String;
 }

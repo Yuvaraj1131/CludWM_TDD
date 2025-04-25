@@ -296,3 +296,16 @@ entity MonoPalletCubeLimit {
       MonoMIN       : Decimal(15, 3);
       MonoThreshold : Decimal(15, 3);
 }
+
+entity DataSync : managed {
+  key Object : String(10);
+  Region : String(5);
+  LastSuccessfulRun : DateTime;
+}
+
+entity DataSyncLog : cuid, managed {
+  Object : Association to DataSync;
+  LogText : String;
+  SyncDateUsed : DateTime; 
+  Status : String(10);
+}
