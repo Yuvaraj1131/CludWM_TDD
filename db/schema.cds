@@ -533,3 +533,21 @@ entity DeliveryItems {
                                on  To_SalesDocumentItem.SalesDocument     = SalesOrder
                                and To_SalesDocumentItem.SalesDocumentItem = SalesOrderItem;
 }
+
+entity MaterialStorageLocation {
+  key Material           : Association to Materials;
+  key Plant              : String(4);
+  key StorageLocation    : String(4);
+      MaintenanceStatus  : String(15);
+      PhysInvblock       : String(1);
+      Unrestrictred      : Decimal(13, 3);
+      StockInTransfer    : Decimal(13, 3);
+      StockInTransfer2   : Decimal(13, 3);
+      InQualityInsp      : Decimal(13, 3);
+      RestrictedUseStock : Decimal(13, 3);
+      Blocked            : Decimal(13, 3);
+      Returns            : Decimal(13, 3);
+      ReplenishmentQty   : Decimal(13, 3);
+      StorageBin         : String(10);
+      pickingArea        : String(3);
+}

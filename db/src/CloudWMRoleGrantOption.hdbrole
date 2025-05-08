@@ -1,0 +1,21 @@
+{
+  "role": {
+    "name": "CloudWMRole#",
+    "schema_privileges": [
+      {
+        "privileges_with_grant_option": [
+          "ALTER",
+          "CREATE ANY",
+          "CREATE TEMPORARY TABLE",
+          "DELETE",
+          "EXECUTE",
+          "INSERT",
+          "SELECT",
+          "SELECT CDS METADATA",
+          "SELECT METADATA",
+          "UPDATE"
+        ]
+      }
+    ]
+  }
+}
