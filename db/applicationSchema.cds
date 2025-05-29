@@ -18,9 +18,8 @@ entity PickTaskStatuses {
 }
 
 entity PickTypes {
-  key ID                    : String(15);
-      Description           : localized String(100);
-      dropPerPositionInCage : Int16;
+  key ID          : String(15);
+      Description : localized String(100);
 }
 
 entity Media {
@@ -29,21 +28,25 @@ entity Media {
 }
 
 entity MediaTypes : cuid {
-  Plant                 : String(4);
-  Temperature           : String(12);
-  Warehouse             : Association to Warehouses;
-  Media                 : Association to Media;
-  NoOfPosition          : Int16;
-  PositionCubicCapacity : Decimal(15, 3);
-  CapacityUtilisation   : Decimal(15, 3);
-  SingleItemMaxWeight   : Decimal(15, 3);
-  MaximumWeight         : Decimal(15, 3);
-  monoMin               : Decimal(15, 3);
-  monoMax               : Decimal(15, 3);
-  monoThreshold         : Decimal(15, 3);
-  multiMin              : Decimal(15, 3);
-  multiMax              : Decimal(15, 3);
-  multiThreshold        : Decimal(15, 3);
+  Plant                    : String(4);
+  Temperature              : String(12);
+  Media                    : Association to Media;
+  NoOfPosition             : Int16;
+  PositionCubicCapacity    : Decimal(15, 3);
+  CapacityUtilisation      : Decimal(15, 3);
+  SingleItemMaxWeight      : Decimal(15, 3);
+  MaximumWeightCage        : Decimal(15, 3);
+  MaximumWeightMono        : Decimal(15, 3);
+  MaximumWeightMulti       : Decimal(15, 3);
+  MonoCubeMin              : Decimal(15, 3);
+  MonoCubeMax              : Decimal(15, 3);
+  MonoCubeThreshold        : Decimal(15, 3);
+  MultiCubeMin             : Decimal(15, 3);
+  MultiCubeMax             : Decimal(15, 3);
+  MultiCubeThreshold       : Decimal(15, 3);
+  CustomerPerPositionSweep : Int16;
+  CustomerPerPositionPick  : Int16;
+  SheetingNoOfCustomers    : Int16;
 }
 
 entity StorageLocationMerging {
@@ -223,27 +226,24 @@ entity PalletisationItems : cuid {
       OpenQuantity   : Decimal(15, 3);
 }
 
-entity ValidPlants {
-  key Plant       : String(4);
-      Description : String(15);
-}
-
 entity PlantRoutes {
-  key Plant : Association to ValidPlants;
-  key Route : String(10);
+  key Plant               : String(4);
+  key Route               : String(10);
+      Priority            : Integer;
+      PlannedDepatureTime : Timestamp;
 }
 
 entity MediaDeterminations {
-  key Plant                 : String(4);
-  key Temperature           : String(12);
-  key PickType              : Association to PickTypes;
-  key Route                 : String(10);
-      SheetingNoOfCustomers : Int16;
-      OutputMediaType       : Association to MediaTypes;
+  key Plant           : String(4);
+  key Temperature     : String(12);
+  key PickType        : Association to PickTypes;
+  key Route           : String(10);
+      OutputMediaType : Association to MediaTypes;
 }
 
 entity RouteVechicleMappings {
   key Route      : String(10);
+  key Plant      : String(4);
   key VechicleID : String(15);
 }
 
@@ -261,8 +261,10 @@ entity RemovalStrategyItems {
 }
 
 entity PickWalkSequence {
-  key StorageBin : String(10);
-      Sequence   : Integer;
+  key WarehouseNumber : Association to Warehouses;
+  key StorageType     : String(3);
+  key StorageBin      : String(10);
+      Sequence        : Integer;
 }
 
 entity ReplenRuleHeaders : cuid {
@@ -282,30 +284,35 @@ entity ReplenRuleItems : cuid {
 }
 
 entity MaterialPackings {
-  key Material             : Association to Materials;
-  key PlantIdentifier      : String(4);
-      IsPackingBoxRequired : Boolean;
-      NoOfMaterialPerBox   : Int16;
+  key Material                  : Association to Materials;
+      IsPackingBoxRequired      : Boolean;
+      WeightTolarencePercentage : Int16;
+      WeightStopPercentage      : Int16;
 }
 
-entity MonoPalletCubeLimit {
+/*entity MonoPalletCubeLimit {
   key Plant         : String(4);
   key Temperature   : String(12);
   key Route         : String(10);
       MonoMAX       : Decimal(15, 3);
       MonoMIN       : Decimal(15, 3);
       MonoThreshold : Decimal(15, 3);
+}*/
+
+entity PackingBox {
+  key PackBoxType   : String(10);
+      CubicCapacity : Decimal(15, 3);
 }
 
 entity DataSync : managed {
-  key Object : String(10);
-  Region : String(5);
-  LastSuccessfulRun : DateTime;
+  key Object            : String(10);
+      Region            : String(5);
+      LastSuccessfulRun : DateTime;
 }
 
 entity DataSyncLog : cuid, managed {
-  Object : Association to DataSync;
-  LogText : String;
-  SyncDateUsed : DateTime; 
-  Status : String(10);
+  Object       : Association to DataSync;
+  LogText      : String;
+  SyncDateUsed : DateTime;
+  Status       : String(10);
 }
