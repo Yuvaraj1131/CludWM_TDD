@@ -13,7 +13,7 @@ using {
 } from './schema';
 
 entity PickTaskStatuses {
-  key ID          : String(10);
+  key ID          : String(20);
       Description : localized String(100);
 }
 
@@ -28,8 +28,8 @@ entity Media {
 }
 
 entity MediaTypes : cuid {
-  Plant                    : String(4);
-  Temperature              : String(12);
+  //Plant                    : String(4);
+  //Temperature              : String(12);
   Media                    : Association to Media;
   NoOfPosition             : Int16;
   PositionCubicCapacity    : Decimal(15, 3);
@@ -69,11 +69,11 @@ entity MHEAssignments : cuid {
 
 entity ShortReasonCodes {
   key Code        : String(5);
-      Description : localized String(15);
+      Description : localized String(40);
 }
 
 entity MarshallingStatuses {
-  key ID          : String(10);
+  key ID          : String(20);
       Description : localized String(40);
 }
 
@@ -108,6 +108,7 @@ entity MarshallingBins {
       Temperature       : String(12);
       Status            : Association to MarshallingBinStatuses;
       IsBlocked         : Boolean;
+      CanOpenClose      : Boolean;
 }
 
 entity MarshallingRules : cuid {
@@ -122,7 +123,7 @@ entity MarshallingRules : cuid {
 }
 
 entity PalletisationStatuses {
-  key ID          : String(10);
+  key ID          : String(20);
       Description : localized String(40);
 }
 
@@ -256,7 +257,7 @@ entity RemovalStrategyHeaders : cuid {
 
 entity RemovalStrategyItems {
   key Sequence    : Integer;
-      Strategy    : Association to RemovalStrategyHeaders;
+  key Strategy    : Association to RemovalStrategyHeaders;
       StorageType : String(3);
 }
 
